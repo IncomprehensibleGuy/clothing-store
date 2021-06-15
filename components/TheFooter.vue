@@ -55,14 +55,15 @@ export default {
 
 <style lang="scss" scoped>
 .footer {
+  //justify-self: flex-end;
   border-top: 1px solid $border;
 
   &__body {
-    max-width: rem(1440);
+    //max-width: rem(1440);
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    padding: rem(50) rem(20) rem(100);
+    padding: rem(50) 0 rem(100);
     grid-gap: 20px;
 
     @include breakpoint_max(md) {
@@ -105,6 +106,7 @@ export default {
   }
 
   &__list {
+    padding: 0;
   }
 
   &__list-item {

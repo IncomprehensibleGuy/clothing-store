@@ -5,7 +5,7 @@ html {
   font-size: 16px;
   font-family: $base-font-family;
 
-  @include breakpoint(xxl) {
+  @include breakpoint(xl) {
     font-size: 18px;
   }
 }
@@ -21,11 +21,10 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-#app {
+#__nuxt, #__layout {
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 [lazy] {

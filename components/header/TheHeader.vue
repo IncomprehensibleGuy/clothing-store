@@ -38,10 +38,10 @@ export default {
   z-index: 1;
 
   &__body {
-    max-width: rem(1440);
+    //max-width: rem(1420);
     height: 100%;
     margin: auto;
-    padding: 0 rem(20);
+    padding: 0;
     @include flex(flex, center, space-between);
   }
 }

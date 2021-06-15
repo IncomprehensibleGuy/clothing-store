@@ -1,6 +1,6 @@
 <template>
   <div class="uk-margin-large-bottom tm-checkout-page">
-    <h3 class="tm-page-title tm-page-title__checkout">Оформление заказа</h3>
+    <PageTitle title="Оформление заказа" />
 
     <section class="tm-checkout__section">
       <div class="uk-grid tm-checkout__container" uk-grid>
@@ -459,8 +459,14 @@
 </template>
 
 <script>
+import PageTitle from '@/components/PageTitle'
+
 export default {
-  name: 'CheckoutPage'
+  name: 'CheckoutPage',
+
+  components: {
+    PageTitle
+  }
 }
 </script>
 

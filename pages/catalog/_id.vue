@@ -98,10 +98,7 @@
     </div>
 
     <div class="related-products uk-margin-large">
-      <div class="uk-width-1-1">
-        <h2 class="uk-text-center">Похожие товары</h2>
-      </div>
-
+      <h2 class="related-products__title">Похожие товары</h2>
       <div
         class="
           uk-grid-small
@@ -188,7 +185,6 @@ export default {
 }
 
 .product {
-  max-width: 1600px;
   margin: 0 auto;
 
   &__images {
@@ -248,6 +244,12 @@ export default {
   }
 
   .related-products {
+    border-top: 1px solid $border;
+
+    &__title {
+      margin: 20px 0;
+      text-align: center;
+    }
   }
 
   &__btn-container {

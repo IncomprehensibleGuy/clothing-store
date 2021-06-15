@@ -98,6 +98,10 @@ export default {
     width: rem(20);
     height: rem(20);
     cursor: pointer;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 
   &__search {

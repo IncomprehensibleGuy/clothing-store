@@ -3,8 +3,10 @@
     <a
       class="uk-icon app-icon"
       :uk-icon="`icon: ${name}; ratio: ${size}`"
-      :href="url"
-      :class="{ 'uk-icon-button': button }"
+      :class="{
+        'uk-icon-button': button,
+        'heart-icon': name === 'heart'
+      }"
     >
       {{ text }}
     </a>
@@ -19,11 +21,6 @@ export default {
     name: {
       type: String,
       required: true,
-      default: ''
-    },
-    url: {
-      type: String,
-      required: false,
       default: ''
     },
     text: {
@@ -44,11 +41,19 @@ export default {
   },
 
   updated() {
-    const iconComponent = this.$uikit.icon(this.$el)
-    iconComponent.svg.then((svg) => {
-      const path = svg.querySelector('path')
-      path.removeAttribute('fill')
-    })
+    if (this.name === 'heart') {
+      const iconComponent = this.$uikit.icon(this.$el)
+      iconComponent.svg.then((svg) => {
+        const path = svg.querySelector('path')
+        if (path) path.removeAttribute('fill')
+      })
+    }
+  },
+
+  methods: {
+    log() {
+      console.log('click')
+    }
   }
 }
 </script>
@@ -58,6 +63,9 @@ export default {
   width: 36px;
   height: 36px;
   padding: 8px;
+}
+
+.heart-icon {
   fill: none;
   color: #ff4d4d;
 

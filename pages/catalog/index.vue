@@ -1,18 +1,17 @@
 <template>
   <div class="catalog-page">
-    <h3 class="page-title">
-      {{ pageTitle }}
-    </h3>
+    <PageTitle title="Мужская обувь" />
 
     <CatalogFilters />
 
     <div class="products-grid">
-      <product-card v-for="idx in 20" :key="idx"> </product-card>
+      <product-card v-for="idx in 17" :key="idx"> </product-card>
     </div>
   </div>
 </template>
 
 <script>
+import PageTitle from '@/components/PageTitle'
 import CatalogFilters from '@/components/catalog-filters/CatalogFilters'
 import ProductCard from '@/components/ProductCard'
 
@@ -20,14 +19,9 @@ export default {
   name: 'Catalog',
 
   components: {
+    PageTitle,
     CatalogFilters,
     ProductCard
-  },
-
-  data() {
-    return {
-      pageTitle: 'Мужская обувь'
-    }
   }
 }
 </script>
@@ -35,12 +29,7 @@ export default {
 <style lang="scss" scoped>
 .catalog-page {
   margin: 0 auto;
-  max-width: rem(1400);
-}
-
-.page-title {
-  text-align: center;
-  margin: rem(30);
+  //max-width: rem(1400);
 }
 
 .products-grid {
@@ -58,6 +47,10 @@ export default {
 
   @include breakpoint(md) {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  @include breakpoint(xl) {
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 </style>

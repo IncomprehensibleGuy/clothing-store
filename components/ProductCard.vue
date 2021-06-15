@@ -1,5 +1,5 @@
 <template>
-  <div class="uk-card uk-card-default product-card">
+  <div class="uk-card product-card">
     <div class="uk-card-media-top">
       <NuxtLink :to="`/catalog/${product.id}`">
         <img
@@ -10,19 +10,22 @@
       </NuxtLink>
     </div>
     <div class="product-card__body">
-      <div class="uk-flex uk-flex-between">
+      <div class="uk-flex uk-flex-middle uk-flex-between">
         <NuxtLink :to="`/catalog/${product.id}`">
-          <h3 class="uk-card-title uk-margin-remove">
+          <h4>
             {{ product.title }}
-          </h3>
+          </h4>
         </NuxtLink>
         <AppIcon name="heart" />
-        <!-- here should be the like icon -->
       </div>
-      <p class="uk-margin-small product-card__availability">
-        В наличии в <span>{{ product.colors.length }}</span> цветах
+      <p class="product-card__availability">
+        {{
+          product.colors.length
+            ? 'В наличии в ' + product.colors.length + 'цветах'
+            : 'Нет в наличии'
+        }}
       </p>
-      <p class="uk-margin-small product-card__price">
+      <p class="product-card__price">
         {{ formatPrice(product.price) }}
       </p>
     </div>
@@ -79,71 +82,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.svg {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  padding: 8px 6px;
-  background-color: #f8f8f8;
-  pointer-events: all;
-
-  .path {
-    fill: none;
-    stroke: #999;
-  }
-
-  &:hover {
-    background-color: #ebebeb;
-
-    path {
-      stroke: #ff4d4d;
-    }
-  }
-
-  &.liked path {
-    fill: #ff4d4d;
-    stroke: #ff4d4d;
-  }
-}
-
 .product-card {
-  box-shadow: none;
+  padding: 0;
 
   &:hover {
-    box-shadow: 0 5px 15px #ddd;
+    box-shadow: 0 3px 9px #ddd;
   }
 
   &__body {
-    padding: 10px 15px;
+    padding: 10px;
 
-    .like-btn {
-      padding: 8px;
-
-      &:hover {
-        color: #ff4d4d;
-      }
-
-      & .liked {
-        fill: blue;
-      }
+    & > p {
+      height: 30px;
+      display: flex;
+      align-items: center;
     }
   }
 
   &__price {
     color: #333;
-  }
-  .size {
-    display: inline-block;
-    min-width: 30px;
-    height: 30px;
-    text-align: center;
-    padding: 0.5em 0;
-    border: 1px solid $border;
-    transition: ease 0.3s;
-
-    &:hover {
-      background-color: #eee;
-    }
   }
 }
 </style>
