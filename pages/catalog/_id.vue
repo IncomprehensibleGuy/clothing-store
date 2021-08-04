@@ -12,7 +12,7 @@
             <div class="uk-slider-container" uk-lightbox="animation: slide">
               <ul class="uk-slider-items uk-child-width-1-1">
                 <li v-for="(image, index) in images" :key="index">
-                  <a :href="`@images/products/${image}`">
+                  <a :href="require(`@images/products/${image}`)">
                     <img
                       :src="require(`@images/products/${image}`)"
                       :alt="image"
@@ -47,7 +47,10 @@
           </div>
 
           <div class="product__sizes-block">
-            <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+            <ul
+              class="uk-subnav uk-subnav-pill product__sizes-switcher"
+              uk-switcher
+            >
               <li v-for="(sizeName, index) in Object.keys(sizes)" :key="index">
                 <a href="#">
                   {{ sizeName }}
@@ -83,7 +86,7 @@
           <a
             class="uk-button uk-button-default uk-border-pill product__save-btn"
           >
-            Сохранить <app-icon name="heart" :button="false" />
+            Сохранить
           </a>
         </div>
 
@@ -99,17 +102,7 @@
 
     <div class="related-products uk-margin-large">
       <h2 class="related-products__title">Похожие товары</h2>
-      <div
-        class="
-          uk-grid-small
-          uk-child-width-1-6@l
-          uk-child-width-1-4@m
-          uk-child-width-1-2@s
-          uk-child-width-1-1
-          related-products
-        "
-        uk-grid
-      >
+      <div class="related-products__grid">
         <ProductCard v-for="(n, index) in 6" :key="index" />
       </div>
     </div>
@@ -118,14 +111,12 @@
 
 <script>
 import ProductCard from '@/components/ProductCard'
-import AppIcon from '@/components/AppIcon'
 
 export default {
   name: 'ProductPage',
 
   components: {
-    ProductCard,
-    AppIcon
+    ProductCard
   },
 
   validate({ params }) {
@@ -162,21 +153,21 @@ export default {
       width: 30px;
       height: 30px;
     }
-    // background-color: #888 !important;
   }
-}
-.uk-lightbox-toolbar {
-  background: none !important;
-}
 
-.uk-lightbox-button {
-  background: none;
-  color: #333 !important;
-  margin: 0 5px !important;
-}
-.uk-lightbox-page body .container {
-  filter: blur(3px);
-  background: rgba(0, 0, 0, 0.2);
+  &-toolbar {
+    background: none !important;
+  }
+
+  &-button {
+    background: none;
+    color: #333 !important;
+    margin: 0 5px !important;
+  }
+  &-page body .container {
+    filter: blur(3px);
+    background: rgba(0, 0, 0, 0.2);
+  }
 }
 
 .uk-position-center-left-out,
@@ -188,7 +179,6 @@ export default {
   margin: 0 auto;
 
   &__images {
-    // max-width: 50vw;
     margin: 0 60px 0 0;
   }
 
@@ -204,6 +194,7 @@ export default {
     object-fit: cover;
   }
   &__title {
+    margin-bottom: 20px;
   }
   &__availability {
   }
@@ -211,20 +202,27 @@ export default {
     margin: 20px 0;
   }
   &__description {
+    margin: 15px 0 0 0;
     font-size: 16px;
   }
+
   &__sizes-block {
-    margin: 0px auto 20px;
+    margin: 0 auto 20px;
   }
+
+  &__sizes-switcher {
+    margin: 0 0 15px 0;
+  }
+
   &__sizes {
     display: grid;
-    grid-template-columns: repeat(5, 50px);
+    grid-template-columns: repeat(5, 42px);
     grid-gap: 10px;
     color: #000;
 
     > li {
       display: inline-block;
-      padding: 12px;
+      line-height: 42px;
       height: 30px;
       border: 1px solid $border;
     }
@@ -234,22 +232,16 @@ export default {
     }
   }
   &__size {
-    height: 40px !important;
+    height: 42px !important;
     text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
   }
   &__size.active {
     background-color: #333 !important;
     color: #fff;
     border: 2px solid black;
-  }
-
-  .related-products {
-    border-top: 1px solid $border;
-
-    &__title {
-      margin: 20px 0;
-      text-align: center;
-    }
   }
 
   &__btn-container {
@@ -261,23 +253,37 @@ export default {
     padding: 0 40px;
     line-height: 53px;
   }
-
-  &__save-btn > span {
-    vertical-align: 1.5px;
-    width: 15px;
-    height: 15px;
-  }
-  &__save-btn:hover > span {
-    color: rgb(255, 77, 77);
-  }
 }
 
-.product-images-container {
-  // width: 40vw;
-}
+.related-products {
+  border-top: 1px solid $border;
 
-.product-image {
-  object-fit: cover;
+  &__title {
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  &__grid {
+    display: grid;
+    grid-gap: rem(20);
+    margin: 0 0 rem(40) 0;
+
+    @include breakpoint(426, true) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoint(sm) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include breakpoint(md) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @include breakpoint(xl) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
 }
 
 //@media (max-width: $md) {
